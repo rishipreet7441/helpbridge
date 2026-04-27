@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Impact Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial;
+    background: linear-gradient(135deg,#f8fafc,#e0f2fe);
+    color:#1e293b;
+}
+
+/* Section */
+.impact-section{
+    padding:30px;
+    max-width:800px;
+    margin:auto;
+}
+
+/* Unique Title Design */
+.title-box{
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:30px;
+    background: linear-gradient(135deg,#38bdf8,#6366f1);
+    color:white;
+    font-weight:bold;
+    font-size:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ box-shadow:0 0 10px rgba(99,102,241,0.3);}
+    to{ box-shadow:0 0 20px rgba(56,189,248,0.6);}
+}
+
+/* Pulse */
+.pulse-container{
+    display:flex;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.pulse-dot{
+    width:12px;
+    height:12px;
+    background:#22c55e;
+    border-radius:50%;
+    margin-right:10px;
+    position:relative;
+}
+
+.pulse-dot::after{
+    content:"";
+    position:absolute;
+    width:12px;
+    height:12px;
+    background:#22c55e;
+    border-radius:50%;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);opacity:0.7;}
+    100%{transform:scale(2.5);opacity:0;}
+}
+
+/* Timeline */
+.timeline{
+    border-left:2px solid rgba(0,0,0,0.1);
+    padding-left:20px;
+}
+
+/* Event */
+.event{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.event .dot{
+    position:absolute;
+    left:-30px;
+    top:5px;
+    width:14px;
+    height:14px;
+    background:#6366f1;
+    border-radius:50%;
+}
+
+/* Card */
+.content{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.content:hover{
+    transform:translateX(6px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.content h4{
+    margin:0;
+    font-size:16px;
+}
+
+.content p{
+    margin:5px 0;
+    font-size:14px;
+    color:#475569;
+}
+
+.content span{
+    font-size:12px;
+    color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="impact-section">
+
+    <!-- Unique Heading -->
+    <div class="title-box">✨ Every Help Tells a Story</div>
+
+    <!-- Live Pulse -->
+    <div class="pulse-container">
+        <div class="pulse-dot"></div>
+        <span>Live Activity</span>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline" id="timeline">
+
+        <div class="event">
+            <div class="dot"></div>
+            <div class="content">
+                <h4>Food Donation</h4>
+                <p>Helped 3 families in Hyderabad</p>
+                <span>2 hours ago</span>
+            </div>
+        </div>
+
+        <div class="event">
+            <div class="dot"></div>
+            <div class="content">
+                <h4>Medical Support</h4>
+                <p>Provided medicines</p>
+                <span>Yesterday</span>
+            </div>
+        </div>
+
+        <div class="event">
+            <div class="dot"></div>
+            <div class="content">
+                <h4>Education Help</h4>
+                <p>Donated books to student</p>
+                <span>2 days ago</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const timeline = document.getElementById("timeline");
+
+    async function loadActivity() {
+        try {
+            const res = await fetch("http://127.0.0.1:8000/get-activity");
+
+            if (!res.ok) throw new Error("API not working");
+
+            const data = await res.json();
+
+            timeline.innerHTML = "";
+
+            data.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "event";
+
+                div.innerHTML = `
+                    <div class="dot"></div>
+                    <div class="content">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                        <span>${item.time}</span>
+                    </div>
+                `;
+
+                timeline.appendChild(div);
+            });
+
+        } catch (err) {
+            console.error("Dashboard error:", err);
+        }
+    }
+
+    loadActivity();
+
+});
+</script>
+
+</body>
+</html>

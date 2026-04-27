@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact HelpBridge</title>
+<link rel="stylesheet" href="helpbridge.css">
+</head>
+
+<body>
+<a href="home.html" class="back-home">← Back to Home</a>
+
+<div class="container">
+    <h1>Reach HelpBridge 💙</h1>
+    <p>We’re here to connect help with those who need it.</p>
+
+    <div class="contact-box">
+        <p><b>Email:</b> helpbridge.ngo@gmail.com</p>
+    </div>
+
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+
+</div>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email, message })
+        });
+
+        const data = await res.json();
+        alert(data.message);
+
+        this.reset();
+
+    } catch (err) {
+        console.error(err);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HelpBridge – Proof of Validation</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#E9A840;--teal:#1D9E75;--deep:#0F1923;
+  --border:rgba(0,0,0,0.08);--muted:#6B7280;--light:#F4F6FB;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:#1a1a2e;min-height:100vh}
+
+/* NAV */
+nav{background:var(--deep);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:62px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#fff;display:flex;align-items:center;gap:8px}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;font-weight:500;cursor:pointer;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.btn-nav{background:var(--gold);color:var(--deep);font-size:12px;font-weight:700;padding:7px 18px;border-radius:20px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.btn-nav:hover{opacity:.9}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0b1952 0%,  #436798 100%);padding:2.5rem 2rem 0;overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;right:-80px;top:-60px;width:320px;height:320px;border-radius:50%;background:rgba(233,168,64,0.06);pointer-events:none}
+.hero-inner{max-width:960px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;padding-bottom:2rem}
+.hero h1{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color: #feffff;line-height:1.2;margin-bottom:8px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:rgb(255, 255, 255);font-size:13.5px;max-width:400px;line-height:1.7}
+.cert-box{background:rgb(250, 248, 248);border:1px solid rgb(255, 255, 255);border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:14px;white-space:nowrap;flex-shrink:0}
+.cert-label{font-size:10px;color:rgb(247, 247, 247);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.cert-val{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--gold)}
+.cert-copy{background:rgba(233,168,64,0.15);border:none;color:var(--gold);font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.cert-copy:hover{background:rgba(233,168,64,0.28)}
+
+/* STATUS BAR */
+.status-bar{background:#162130;border-top:1px solid rgba(255,255,255,0.06);padding:0.65rem 2rem}
+.status-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,0.2);flex-shrink:0}
+.status-text{font-size:12px;color:rgba(255,255,255,0.45)}
+.status-text strong{color:rgba(255,255,255,0.85);font-weight:500}
+.chips{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.chip{font-size:11px;padding:4px 11px;border-radius:12px;font-weight:600}
+.chip-v{background:#EAF3DE;color:#3B6D11}
+.chip-r{background:#E6F1FB;color:#185FA5}
+.chip-d{background:#FAEEDA;color:#854F0B}
+
+/* MAIN */
+.main{max-width:960px;margin:0 auto;padding:1.75rem 2rem 3rem}
+
+/* PROOF HEADER CARD */
+.proof-hdr{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between}
+.shield{width:44px;height:44px;background:linear-gradient(135deg,#1D9E75,#0F6E56);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.shield svg{width:22px;height:22px}
+.proof-hdr-info{margin-left:12px;flex:1}
+.proof-hdr-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--deep)}
+.proof-hdr-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.badge-valid{background:#EAF3DE;color:#3B6D11;font-size:12px;font-weight:600;padding:6px 16px;border-radius:20px;display:flex;align-items:center;gap:7px}
+.badge-valid::before{content:'';width:7px;height:7px;border-radius:50%;background:#3B6D11;display:inline-block}
+
+/* TWO COLUMN */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
+
+/* PARTY CARDS */
+.party{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.25rem 1.5rem;position:relative;overflow:hidden}
+.party::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.party.vol::before{background:linear-gradient(90deg,#1D9E75,#9FE1CB)}
+.party.rec::before{background:linear-gradient(90deg,#378ADD,#B5D4F4)}
+.role-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.role-label.v{color:#1D9E75}
+.role-label.r{color:#378ADD}
+.rdot{width:6px;height:6px;border-radius:50%}
+.rdot.v{background:#1D9E75}
+.rdot.r{background:#378ADD}
+.avatar-row{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.ava{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:16px;flex-shrink:0}
+.ava.v{background:#EAF3DE;color:#3B6D11}
+.ava.r{background:#E6F1FB;color:#185FA5}
+.ava-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--deep)}
+.ava-handle{font-size:12px;color:var(--muted);margin-top:1px}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.di-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
+.di-val{font-size:13px;font-weight:500;color:#1a1a2e}
+.divider{height:1px;background:var(--border);margin:14px 0}
+.reward-row{display:flex;align-items:center;justify-content:space-between}
+.reward-label{font-size:11px;color:var(--muted)}
+.dml-amount{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:5px}
+.dml-badge{font-size:10px;background:#FAEEDA;color:#854F0B;padding:2px 8px;border-radius:6px;font-weight:700}
+
+/* HELP DETAILS */
+.card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:1.4rem 1.5rem;margin-bottom:1.25rem}
+.sec-title{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:16px}
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:540px){.meta-grid{grid-template-columns:1fr 1fr}}
+.meta-box{background:#F7F9FC;border-radius:9px;padding:10px 13px}
+.meta-box .lbl{font-size:10px;color:var(--muted);margin-bottom:3px}
+.meta-box .val{font-size:13px;font-weight:600;color:var(--deep)}
+.desc-box{background:#F7F9FC;border-radius:9px;padding:13px 15px;font-size:13.5px;color:#374151;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.tag{font-size:11px;padding:4px 11px;border-radius:12px;font-weight:500;background:#E1F5EE;color:#0F6E56}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-22px;top:4px;width:11px;height:11px;border-radius:50%;border:2px solid #1D9E75;background:#fff}
+.tl-dot.done{background:#1D9E75}
+.tl-dot.pending{border-color:var(--gold)}
+.tl-time{font-size:11px;color:var(--muted);margin-bottom:2px}
+.tl-lbl{font-size:13px;font-weight:500;color:var(--deep)}
+.tl-sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* DML REWARDS */
+.dml-card{background:var(--deep);border-radius:14px;padding:1.4rem 1.5rem;margin-bottom:1.25rem;position:relative;overflow:hidden}
+.dml-card::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(233,168,64,0.07);pointer-events:none}
+.dml-head{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.dml-main{display:flex;align-items:flex-end;gap:2rem;margin-bottom:20px;flex-wrap:wrap}
+.dml-big{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:var(--gold);line-height:1}
+.dml-meta{display:flex;flex-direction:column;gap:6px;padding-bottom:4px}
+.dml-unit{font-size:13px;color:rgba(255,255,255,0.45);font-weight:500}
+.dml-up{font-size:12px;color:#22c55e;background:rgba(34,197,94,0.1);padding:3px 11px;border-radius:10px;display:inline-block}
+.dml-bars{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bar-item{text-align:center}
+.bar-bg{background:rgba(255,255,255,0.06);border-radius:5px;height:52px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;margin-bottom:5px;overflow:hidden}
+.bar-fill{width:22px;border-radius:4px 4px 0 0;background:rgba(233,168,64,0.3);transition:height .6s ease}
+.bar-fill.active{background:var(--gold)}
+.bar-lbl{font-size:10px;color:rgba(255,255,255,0.3)}
+.bar-val{font-size:11px;color:rgba(255,255,255,0.6);font-weight:500;margin-top:2px}
+.dml-divider{height:1px;background:rgba(255,255,255,0.07);margin:16px 0}
+.dml-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.dml-stat{background:rgba(255,255,255,0.04);border-radius:8px;padding:10px 13px}
+.dml-stat .lbl{font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:3px}
+.dml-stat .val{font-size:15px;font-weight:600;color:#fff}
+.dml-stat .val span{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400}
+
+/* TRENDING */
+.trend-item{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid var(--border)}
+.trend-item:last-child{border-bottom:none}
+.t-rank{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--muted);width:22px;text-align:center;flex-shrink:0}
+.t-rank.gold{color:var(--gold)}
+.t-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.t-info{flex:1}
+.t-name{font-size:13px;font-weight:600;color:var(--deep)}
+.t-count{font-size:11px;color:var(--muted);margin-top:1px}
+.t-bar-bg{width:90px;height:5px;background:#EAECEF;border-radius:3px;flex-shrink:0}
+.t-bar-fill{height:5px;border-radius:3px;background:var(--teal)}
+
+/* ACTIONS */
+.actions{display:flex;align-items:center;gap:10px;margin-top:.5rem;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--deep);border:none;padding:12px 26px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s}
+.btn-gold:hover{opacity:.88}
+.btn-out{background:#fff;color:var(--deep);border:1px solid var(--border);padding:12px 22px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:background .2s}
+.btn-out:hover{background:#F7F9FC}
+.hash{font-family:monospace;font-size:11px;color:#9CA3AF;background:#F3F4F6;padding:4px 10px;border-radius:5px;margin-left:auto}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <svg width="34" height="20" viewBox="0 0 34 20" fill="none">
+      <path d="M2 16C6 7 12 4 17 4C22 4 28 7 32 16" stroke="#E9A840" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <rect x="0" y="14" width="9" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+      <rect x="25" y="14" width="9" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+      <line x1="11" y1="14" x2="11" y2="18" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+      <line x1="17" y1="3" x2="17" y2="18" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+      <line x1="23" y1="14" x2="23" y2="18" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+    </svg>
+    Help<span>Bridge</span>
+  </div>
+  <div class="nav-links">
+    <a href="DashBoard.html">Dashboard</a>
+    <a href="MyHelps.html">My Helps</a>
+    <a href="Community.html">Community</a>
+    <a href="TrendingCharts.html">TrendingCharts</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Proof of <em>Validation</em></h1>
+      <p>This certificate verifies a help event occurred, was completed, and has been validated by both parties on the HelpBridge network.</p>
+    </div>
+      
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+<div id="dmlBars" style="display:none;"></div>
+  <!-- Volunteer + Recipient -->
+  <div class="two-col">
+
+    <!-- VOLUNTEER (LEFT) -->
+    <div class="party vol">
+      <div class="role-label v"><div class="rdot v"></div>Volunteer</div>
+      <div class="avatar-row">
+        <div class="ava v">AR</div>
+        <div>
+          <div class="ava-name" id="volunteerName">Arjun Reddy</div>
+          <div class="ava-handle">@arjun.r · Hyderabad</div>
+        </div>
+      </div>
+      <div class="dg">
+        <div>
+          <div class="di-label">Phone</div>
+          <div class="di-val">+91 98765 ••••</div>
+        </div>
+        <div>
+          <div class="di-label">Member Since</div>
+          <div class="di-val">Jan 2025</div>
+        </div>
+        <div>
+          <div class="di-label">Total Helps</div>
+          <div class="di-val">47 events</div>
+        </div>
+        <div>
+          <div class="di-label">Trust Score</div>
+          <div class="di-val" style="color:#1D9E75">★ 4.9 / 5</div>
+        </div>
+        <div>
+          <div class="di-label">Location</div>
+          <div class="di-val">Banjara Hills</div>
+        </div>
+        <div>
+          <div class="di-label">Speciality</div>
+          <div class="di-val">Medical, Tech</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="reward-row">
+      </div>
+    </div>
+
+    <!-- RECIPIENT (RIGHT) -->
+    <div class="party rec">
+      <div class="role-label r"><div class="rdot r"></div>Recipient</div>
+      <div class="avatar-row">
+        <div class="ava r">PS</div>
+        <div>
+<div class="ava-name" id="recipientName">Priya Sharma</div>
+          <div class="ava-handle">@priya.s · Hyderabad</div>
+        </div>
+      </div>
+      <div class="dg">
+        <div>
+          <div class="di-label">Phone</div>
+          <div class="di-val">+91 91234 ••••</div>
+        </div>
+        <div>
+          <div class="di-label">Registered</div>
+          <div class="di-val">Mar 2026</div>
+        </div>
+        <div>
+          <div class="di-label">Help Requests</div>
+          <div class="di-val">3 total</div>
+        </div>
+        <div>
+          <div class="di-label">Confirmed</div>
+          <div class="di-val" style="color:#378ADD">Yes ✓</div>
+        </div>
+        <div>
+          <div class="di-label">Location</div>
+          <div class="di-val">Jubilee Hills</div>
+        </div>
+        <div>
+          <div class="di-label">Verified ID</div>
+          <div class="di-val">Aadhaar ✓</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="reward-row">
+        <div class="reward-label">Recipient confirmation</div>
+        <div style="font-size:13px;color:#378ADD;font-weight:600">Signed &amp; confirmed ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Details -->
+  <div class="card">
+    <div class="sec-title">Help Event Details</div>
+    <div class="meta-grid">
+      <div class="meta-box"><div class="lbl">Date &amp; Time</div><div class="val">26 Apr 2026, 10:45 AM</div></div>
+      <div class="meta-box"><div class="lbl">Duration</div><div class="val">12 min</div></div>
+      <div class="meta-box"><div class="lbl">Category</div><div class="val">Medical Assist</div></div>
+      <div class="meta-box"><div class="lbl">Location</div><div class="val">Banjara Hills, Hyd</div></div>
+      <div class="meta-box"><div class="lbl">Mode</div><div class="val">In-Person</div></div>
+      <div class="meta-box"><div class="lbl">Urgency</div><div class="val" style="color:#E24B4A">High Priority</div></div>
+    </div>
+    <div class="desc-box" id="helpDescription">
+      Arjun helped Priya navigate an emergency hospital visit, assisted with form filling, translated conversations with medical staff, and coordinated transport back home after discharge. He stayed for the full duration and ensured she was safely settled.
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn-gold" onclick="window.print()">⬇ Download Certificate</button>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// Animate DML bars
+const months = [
+  {lbl:'Jan',val:320,pct:67},
+  {lbl:'Feb',val:280,pct:58},
+  {lbl:'Mar',val:410,pct:86},
+  {lbl:'Apr',val:480,pct:100,active:true}
+];
+const container = document.getElementById('dmlBars');
+months.forEach(m => {
+  const item = document.createElement('div');
+  item.className = 'bar-item';
+  item.innerHTML = `
+    <div class="bar-bg">
+      <div class="bar-fill${m.active?' active':''}" id="bar-${m.lbl}" style="height:4px"></div>
+    </div>
+    <div class="bar-lbl">${m.lbl}</div>
+    <div class="bar-val">${m.val}</div>
+  `;
+  container.appendChild(item);
+});
+// Animate heights
+setTimeout(() => {
+  months.forEach(m => {
+    const el = document.getElementById('bar-'+m.lbl);
+    if(el) el.style.height = (m.pct * 44 / 100) + 'px';
+  });
+}, 300);
+
+// Copy button reset
+document.querySelectorAll('.cert-copy').forEach(btn => {
+  btn.addEventListener('click', () => setTimeout(() => btn.textContent = 'Copy', 2000));
+});
+</script>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  async function loadData() {
+    try {
+      const res = await fetch("http://127.0.0.1:8000/get-latest-data");
+
+      if (!res.ok) {
+        throw new Error("API not responding");
+      }
+
+      const data = await res.json();
+
+      // Safe element access
+      const volunteerEl = document.getElementById("volunteerName");
+      const recipientEl = document.getElementById("recipientName");
+      const descEl = document.getElementById("helpDescription");
+
+      if (volunteerEl && data.volunteer) {
+        volunteerEl.innerText = data.volunteer.name;
+      }
+
+      if (recipientEl && data.request) {
+        recipientEl.innerText = data.request.name;
+      }
+
+      if (descEl && data.request) {
+        descEl.innerText = data.request.description;
+      }
+
+    } catch (err) {
+      console.error("❌ Error loading data:", err);
+    }
+  }
+  loadData();
+});
+</script>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Community</title>
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #1976d2;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.sidebar h3 {
+  margin-bottom: 10px;
+  color: #1976d2;
+}
+
+.topic {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #ffffff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.topic:hover {
+  transform: scale(1.05);
+  background: #e3f2fd;
+}
+
+/* ===== POST BOX ===== */
+.post-box {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 70px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  resize: none;
+}
+
+.post-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #42a5f5, #ab47bc);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.post-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== POSTS ===== */
+.post {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.post-header {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.post-content {
+  margin: 10px 0;
+  color: #333;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+.action {
+  cursor: pointer;
+  color: #555;
+  transition: 0.3s;
+}
+
+.action:hover {
+  color: #1976d2;
+}
+
+/* ===== RIGHT PANEL ===== */
+.right-panel {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.user:hover {
+  transform: scale(1.05);
+  background: #e3f2fd;
+}
+
+/* ===== GLOW EFFECT ===== */
+body:hover {
+  background: radial-gradient(circle at center, #ffffff, #e3f2fd);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 900px){
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">Community</div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Explore</a>
+    <a href="#">Rewards</a>
+    <a href="#">Profile</a>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- LEFT -->
+  <div class="sidebar">
+    <h3>🔥 Trending</h3>
+    <div class="topic">#EmergencyHelp</div>
+    <div class="topic">#FloodRelief</div>
+    <div class="topic">#BloodDonation</div>
+    <div class="topic">#VolunteerWork</div>
+  </div>
+
+  <!-- CENTER -->
+  <div>
+
+    <!-- CREATE POST -->
+    <div class="post-box">
+      <textarea id="postInput" placeholder="Share something with community..."></textarea>
+      <button class="post-btn" onclick="addPost()">Post</button>
+    </div>
+
+    <!-- POSTS -->
+    <div id="posts">
+
+      <div class="post">
+        <div class="post-header">Rahul • Volunteer</div>
+        <div class="post-content">
+          Helped 5 families during flood relief. Feeling proud to serve!
+        </div>
+        <div class="actions">
+          <div class="action">👍 Like</div>
+          <div class="action">💬 Comment</div>
+          <div class="action">🔗 Share</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">Anjali • Donor</div>
+        <div class="post-content">
+          Donated blood today. Small step but can save lives ❤️
+        </div>
+        <div class="actions">
+          <div class="action">👍 Like</div>
+          <div class="action">💬 Comment</div>
+          <div class="action">🔗 Share</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right-panel">
+    <h3>🏆 Top Contributors</h3>
+
+    <div class="user">
+      <span>Ravi</span>
+      <span>120 pts</span>
+    </div>
+
+    <div class="user">
+      <span>Sneha</span>
+      <span>98 pts</span>
+    </div>
+
+    <div class="user">
+      <span>Arjun</span>
+      <span>87 pts</span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const postsDiv = document.getElementById("posts");
+
+async function loadPosts() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/get-posts");
+    const data = await res.json();
+
+    postsDiv.innerHTML = "";
+
+    data.forEach(post => {
+      const div = document.createElement("div");
+      div.className = "post";
+
+      div.innerHTML = `
+        <div class="post-header">${post.username} • ${post.role}</div>
+        <div class="post-content">${post.content}</div>
+        <div class="actions">
+          <div class="action">👍 Like</div>
+          <div class="action">💬 Comment</div>
+          <div class="action">🔗 Share</div>
+        </div>
+      `;
+
+      postsDiv.appendChild(div);
+    });
+
+  } catch (err) {
+    console.error("Error loading posts:", err);
+  }
+}
+
+async function addPost() {
+  const input = document.getElementById("postInput");
+  const text = input.value;
+
+  if (text.trim() === "") return;
+
+  try {
+    await fetch("http://127.0.0.1:8000/add-post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: "You",
+        role: "User",
+        content: text
+      })
+    });
+
+    input.value = "";
+    loadPosts();
+
+  } catch (err) {
+    console.error("Error posting:", err);
+  }
+}
+
+window.addPost = addPost;
+
+loadPosts();
+
+});
+</script>
+
+</body>
+</html>

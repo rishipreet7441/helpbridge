@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelpBridge | Want to Help</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#eef4ff,#dce9ff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
+}
+
+.container{
+  width:100%;
+  max-width:900px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(15px);
+  border-radius:30px;
+  padding:40px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+h1{
+  text-align:center;
+  color:#12326b;
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#555;
+  margin-bottom:35px;
+  font-size:18px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.full{
+  grid-column:1 / 3;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  color:#12326b;
+  font-weight:bold;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:14px;
+  border:1px solid #c9d7f2;
+  border-radius:14px;
+  outline:none;
+  font-size:15px;
+  background:#fff;
+  transition:0.3s;
+}
+
+input:focus, select:focus, textarea:focus{
+  border-color:#2457d6;
+  box-shadow:0 0 10px rgba(36,87,214,0.2);
+}
+
+textarea{
+  resize:none;
+  height:120px;
+}
+
+.btn{
+  margin-top:30px;
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:#12326b;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#2457d6;
+  transform:translateY(-3px);
+}
+
+.back{
+  display:inline-block;
+  margin-bottom:25px;
+  text-decoration:none;
+  color:#12326b;
+  font-weight:bold;
+}
+
+@media(max-width:700px){
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:1;
+  }
+
+  h1{
+    font-size:34px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<a href="home.html" class="back">← Back to Home</a>
+
+<h1>Want to Help?</h1>
+<p class="subtitle">Tell us how you can support others and we will connect you with those in need.</p>
+
+<form onsubmit="return false;">
+<div class="form-grid">
+
+<div>
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter your name">
+</div>
+
+<div>
+<label>Phone Number</label>
+<input type="tel" id="phone" placeholder="Enter your phone number">
+</div>
+
+<div>
+<label>City / Location</label>
+<input type="text" id="location" placeholder="Enter your location">
+</div>
+
+<div>
+<label>Type of Help You Can Offer</label>
+<select id="type">
+<option>Food Donation</option>
+<option>Medical Support</option>
+<option>Education Support</option>
+<option>Waste Management</option>
+<option>Emergency Assistance</option>
+<option>Disaster Relief</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="full">
+<label>Describe How You Can Help</label>
+<textarea id="description" placeholder="Explain briefly how you can support..."></textarea>
+</div>
+
+</div>
+
+<button class="btn" type="button" onclick="submitOffer()">Submit Offer</button>
+
+</form>
+</div>
+
+<script>
+async function submitOffer() {
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const location = document.getElementById("location").value;
+  const help_type = document.getElementById("type").value;
+  const description = document.getElementById("description").value;
+
+  if (!name || !phone || !location || !description) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/offer-help", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        location,
+        help_type,
+        description
+      })
+    });
+
+    const data = await res.json();
+
+    alert(data.message || "Offer submitted successfully!");
+
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
+  }
+}
+</script>
+
+</body>
+</html>

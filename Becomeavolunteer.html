@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NGO Volunteer Form</title>
+    <link rel="stylesheet" href="Becomeavolunteer.css">
+</head>
+<body>
+
+<a href="home.html" class="back-home">← Back to Home</a>
+
+<div class="wrapper">
+
+    <div class="left">
+        <h1>Volunteer With Us</h1>
+        <p>
+            Be part of a mission that creates real change. 
+            Fill out the application form and contribute your time, skills, and passion.
+        </p>
+    </div>
+
+    <div class="right">
+        <h2>Application Form</h2>
+
+        <!-- ✅ Added form ID -->
+        <form id="volunteerForm">
+
+            <div>
+                <label>Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div>
+                <label>Date of Birth</label>
+                <input type="date" id="dob" required>
+            </div>
+
+            <div>
+                <label>Gender</label>
+                <select id="gender" required>
+                    <option value="">Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Phone Number</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div>
+                <label>ID Type</label>
+                <select id="idType" required>
+                    <option>Aadhaar</option>
+                    <option>Passport</option>
+                    <option>Voter ID</option>
+                </select>
+            </div>
+
+            <div>
+                <label>ID Number</label>
+                <input type="text" id="idNumber" required>
+            </div>
+
+            <div>
+                <label>Upload Photo</label>
+                <input type="file">
+            </div>
+
+            <div class="full">
+                <label>Address</label>
+                <textarea id="address"></textarea>
+            </div>
+
+            <div>
+                <label>Emergency Contact Name</label>
+                <input type="text" id="emergencyName">
+            </div>
+
+            <div>
+                <label>Emergency Contact Number</label>
+                <input type="tel" id="emergencyPhone">
+            </div>
+
+            <div>
+                <label>Qualification</label>
+                <input type="text" id="qualification">
+            </div>
+
+            <div>
+                <label>Occupation</label>
+                <input type="text" id="occupation">
+            </div>
+
+            <div class="full">
+                <label>Skills & Interests</label>
+                <textarea id="skills"></textarea>
+            </div>
+
+            <div class="full">
+                <label>Availability</label>
+                <input type="text" id="availability">
+            </div>
+
+            <button class="btn">Submit Application</button>
+
+        </form>
+    </div>
+
+</div>
+
+<!-- ✅ JS CONNECTION -->
+<script>
+document.getElementById("volunteerForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const res = await fetch("http://127.0.0.1:8000/add-volunteer", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: document.getElementById("name").value,
+            dob: document.getElementById("dob").value,
+            gender: document.getElementById("gender").value,
+            phone: document.getElementById("phone").value,
+            email: document.getElementById("email").value,
+            idType: document.getElementById("idType").value,
+            idNumber: document.getElementById("idNumber").value,
+            address: document.getElementById("address").value,
+            skills: document.getElementById("skills").value,
+            availability: document.getElementById("availability").value
+        })
+    });
+
+    const data = await res.json();
+
+    alert(data.message);
+});
+</script>
+
+</body>
+</html>

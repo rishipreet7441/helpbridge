@@ -1,0 +1,158 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#f8fbff,#eef5ff);
+}
+
+.container{
+  display:flex;
+  height:100vh;
+}
+
+/* LEFT */
+.left{
+  width:40%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.auth-box{
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  width:75%;
+  box-shadow:0 10px 40px rgba(0,0,0,0.1);
+}
+
+/* TOGGLE */
+.toggle{
+  display:flex;
+  margin-bottom:20px;
+}
+
+.toggle button{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:none;
+  cursor:pointer;
+  color:#888;
+  font-weight:bold;
+}
+
+.toggle .active{
+  color:#4a90e2;
+  border-bottom:2px solid #4a90e2;
+}
+
+/* FORM */
+.form{
+  display:none;
+}
+
+.active-form{
+  display:block;
+}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:#f9fbff;
+}
+
+/* REMOVE YELLOW */
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #f9fbff inset !important;
+}
+
+/* FOCUS */
+input:focus{
+  border-color:#4a90e2;
+  outline:none;
+  box-shadow:0 0 8px rgba(74,144,226,0.2);
+}
+
+/* BUTTON */
+button[type="submit"]{
+  width:100%;
+  padding:12px;
+  background:#4a90e2;
+  border:none;
+  border-radius:10px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button[type="submit"]:hover{
+  background:#357bd8;
+}
+
+/* CAPTCHA */
+.captcha-box{
+  display:flex;
+  justify-content:space-between;
+  background:#eef3ff;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+
+/* GOOGLE */
+.google-btn{
+  width:100%;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:white;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+}
+
+.divider{
+  text-align:center;
+  margin:10px 0;
+  color:#aaa;
+}
+
+/* RIGHT */
+.right{
+  width:60%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.content{
+  width:70%;
+}
+
+.content h1{
+  font-size:60px;
+}
+
+.content h3{
+  color:#4a90e2;
+  margin-bottom:20px;
+}
+
+.feature{
+  background:white;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}

@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8fafc;
+    font-family: Arial, Helvetica, sans-serif; /* Normal handwriting style */
+}
+
+.compact-card {
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Reduced width for a neat look */
+    width: 95%;
+    max-width: 650px; 
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #1e293b;
+    padding: 18px 10px; /* Adjusted padding to keep text fully visible */
+    text-align: center;
+}
+
+.header h1 {
+    color: white;
+    margin: 0;
+    font-size: 1.4rem; /* Sized to fit on one line */
+    font-weight: bold;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.item {
+    padding: 25px 15px; /* Neater, tighter spacing */
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+    box-sizing: border-box;
+}
+
+/* Perfect Grid Lines */
+.item:nth-child(odd) {
+    border-right: 1px solid #e2e8f0;
+}
+
+.item:nth-child(3), .item:nth-child(4) {
+    border-bottom: none;
+}
+
+.icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 1.3rem; /* Larger heading as requested */
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.text {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0 0 10px 0;
+}
+
+.link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 500px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .item:nth-child(odd) {
+        border-right: none;
+    }
+    .item:nth-child(2) {
+        border-bottom: 1px solid #e2e8f0;
+    }
+}
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+
+    color: white;
+    background-color: #220849; /* dark orange */
+
+    padding: 10px 16px;
+    border-radius: 8px;
+
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+.back-home:hover {
+    background-color: #e5671f;
+    transform: scale(1.05);
+}

@@ -1,0 +1,146 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Background */
+body{
+  background: linear-gradient(135deg, #eef2ff, #e0f7fa);
+}
+
+/* Main Section */
+.about{
+  max-width:1100px;
+  margin:60px auto;
+  padding:60px;
+  background:#ffffff;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.12);
+  transition:0.3s;
+}
+
+/* Hover subtle effect */
+.about:hover{
+  transform:scale(1.01);
+}
+
+/* Main Heading */
+.about h1{
+  font-size:42px;
+  color:#3f51b5;
+  margin-bottom:25px;
+  text-align:center;
+  letter-spacing:1px;
+}
+
+/* Sub Headings */
+.about h2{
+  font-size:26px;
+  color:#0097a7;
+  margin-top:35px;
+  margin-bottom:15px;
+  border-left:5px solid #3f51b5;
+  padding-left:12px;
+}
+
+/* Paragraphs */
+.about p{
+  font-size:18px;
+  color:#333;
+  line-height:1.9;
+  margin-bottom:18px;
+  text-align:justify;
+}
+
+/* Add spacing between sections */
+.about p + h2{
+  margin-top:40px;
+}
+
+/* Smooth fade animation */
+.about{
+  animation:fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .about{
+    padding:30px;
+  }
+
+  .about h1{
+    font-size:30px;
+  }
+
+  .about h2{
+    font-size:22px;
+  }
+
+  .about p{
+    font-size:16px;
+  }
+}
+/* FEATURES SECTION */
+.features{
+  display:flex;
+  gap:25px;
+  margin-top:50px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+/* FEATURE BOX */
+.feature-box{
+  background:linear-gradient(135deg,#e3f2fd,#e1f5fe);
+  padding:25px;
+  border-radius:15px;
+  width:300px;
+  transition:0.4s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+/* HOVER EFFECT */
+.feature-box:hover{
+  transform:translateY(-10px) scale(1.03);
+  background:linear-gradient(135deg,#d1c4e9,#b2ebf2);
+}
+
+/* Glow line effect */
+.feature-box::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:4px;
+  background:#3f51b5;
+  top:0;
+  left:0;
+}
+
+/* TITLE */
+.feature-box h3{
+  color:#3f51b5;
+  margin-bottom:12px;
+  font-size:20px;
+}
+
+/* TEXT */
+.feature-box p{
+  font-size:15px;
+  color:#555;
+}

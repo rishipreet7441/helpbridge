@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Voice Help Request</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🆘 Help Request</h2>
+
+    <input type="text" id="name" placeholder="Your Name">
+
+    <select id="mode">
+        <option value="need">Need Help</option>
+        <option value="want">Want to Help</option>
+    </select>
+
+    <select id="type">
+        <option value="food">Food</option>
+        <option value="medical">Medical</option>
+        <option value="emergency">Emergency</option>
+    </select>
+
+    <textarea id="details" placeholder="Describe your request"></textarea>
+
+    <button id="voiceBtn">🎤 Voice</button>
+    <button onclick="submitForm()">Submit</button>
+
+    <div id="status"></div>
+
+</div>
+
+<script>
+
+document.getElementById("voiceBtn").onclick = () => {
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+    recognition.start();
+
+    recognition.onresult = function(e) {
+        document.getElementById("details").value = e.results[0][0].transcript;
+    };
+};
+
+async function submitForm() {
+
+    const name = document.getElementById("name").value;
+    const mode = document.getElementById("mode").value;
+    const type = document.getElementById("type").value;
+    const details = document.getElementById("details").value;
+
+    const res = await fetch("http://127.0.0.1:8000/voice-help", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({name,mode,type,details})
+    });
+
+    const data = await res.json();
+    alert(data.message);
+}
+
+</script>
+
+</body>
+</html>

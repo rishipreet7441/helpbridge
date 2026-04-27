@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
+
+.support-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.support-section h1 {
+    font-size: 42px;
+    color: #1f3c88;
+}
+
+.subtitle {
+    max-width: 600px;
+    margin: 10px auto 30px;
+    color: #555;
+    font-size: 18px;
+}
+
+/* Buttons */
+.support-buttons {
+    margin-bottom: 40px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 14px 28px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.donate {
+    background: #e74c3c;
+}
+
+.volunteer {
+    background: #2ecc71;
+}
+
+.main-btn {
+    background: #1f3c88;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Impact Boxes */
+.impact {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.box {
+    background: white;
+    margin: 15px;
+    padding: 25px;
+    border-radius: 12px;
+    width: 180px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.box h2 {
+    color: #1f3c88;
+    font-size: 32px;
+}
+
+/* Other Support */
+.other-support {
+    margin: 40px 0;
+}
+
+.other-support ul {
+    list-style: none;
+    padding: 0;
+}
+
+.other-support li {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Testimonial */
+.testimonial {
+    margin: 40px auto;
+    max-width: 500px;
+    font-style: italic;
+    color: #333;
+    background: rgba(255,255,255,0.6);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.testimonial span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Final CTA */
+.final-cta {
+    margin-top: 30px;
+}
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+
+    color: white;
+    background-color: #220849;
+
+    padding: 10px 16px;
+    border-radius: 8px;
+
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+.back-home:hover {
+    background-color: #ff7a2f;
+    transform: scale(1.05);
+}
