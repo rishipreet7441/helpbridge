@@ -133,7 +133,6 @@
     <h1>Need Help?</h1>
     <p class="subtitle">Tell us what support you need and our volunteers will reach you.</p>
 
-    <!-- ✅ Added form ID -->
     <form id="helpForm">
       <div class="form-grid">
 
@@ -176,37 +175,37 @@
     </form>
   </div>
 
-  <!-- ✅ Backend connection -->
+  <!-- ✅ FIXED BACKEND CONNECTION -->
   <script>
-document.getElementById("helpForm").addEventListener("submit", async function(e){
-  e.preventDefault();
+  document.getElementById("helpForm").addEventListener("submit", async function(e){
+    e.preventDefault();
 
-  alert("Submitting request... Please wait ⏳");
+    alert("Submitting request... Please wait ⏳");
 
-  try {
-    const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/help-request", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        location: document.getElementById("location").value,
-        help_type: document.getElementById("help_type").value,
-        description: document.getElementById("description").value
-      })
-    });
+    try {
+      const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/help-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: document.getElementById("name").value,
+          phone: document.getElementById("phone").value,
+          location: document.getElementById("location").value,
+          help_type: document.getElementById("help_type").value,
+          description: document.getElementById("description").value
+        })
+      });
 
-    const data = await res.json();
-    alert(data.message || "Request submitted successfully!");
+      const data = await res.json();
+      alert(data.message || "Request submitted successfully!");
 
-  } catch(error){
-    alert("Failed to submit. Please try again.");
-    console.error(error);
-  }
-});
-</script>
+    } catch(error){
+      alert("Server is waking up. Please try again.");
+      console.error(error);
+    }
+  });
+  </script>
 
 </body>
 </html>
