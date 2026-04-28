@@ -10,53 +10,49 @@
 <!-- 🔵 Top Row -->
 <div class="top-row">
     <a href="Contact.html" class="contact-link">Contact Us</a>
-
+    <a href="HelpBridge@gmail.com.html" class="email-link">HelpBridge@gmail.com</a>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+<a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+<a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+<a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
 </div>
 
 <!-- 🔵 Logo Row -->
 <div class="logo-row">
-    <img src="logo.jpg" class="logo">
+    <img src="logo.jpeg" class="logo">
+    <span class="website-name">Help Bridge</span>
+
     <a href="Becomeavolunteer.html" class="volunteer-button">Apply as a Volunteer</a>
 </div>
-
-<!-- PROFILE -->
-<img src="https://i.pravatar.cc/40" class="profile-icon" onclick="openProfile()">
-
+<img src="Profile.jpeg" class="profile-icon" onclick="openProfile()">
+</div>
 <script>
 function openProfile() {
   window.location.href = "profile.html";
 }
 </script>
 
-<!-- 🔵 Hero -->
+<!-- 🔵 Glass Hero Section -->
 <div class="glass-box">
-    <img src="logo.jpg" class="glass-logo">
+    <img src="logo.jpeg" class="glass-logo">
+
     <h1 class="glass-title">Help Bridge</h1>
     <p class="glass-subtitle">Helping Communities Grow Together</p>
-</div>
-
-<!-- 🔥 CENTER SECTION (FIXED) -->
-<div class="center-section">
-
-    <!-- Explore -->
-    <div class="explore-section">
-        <a href="explore.html" class="explore-button">Explore</a>
     </div>
 
-    <!-- Buttons -->
-    <div class="help-buttons">
-        <a href="NeedHelp.html" class="need-help-button">🚨 Need Help</a>
-        <a href="WanttoHelp.html" class="want-help-button">❤️ Want to Help</a>
-    </div>
-
+<!-- 👇 Move Explore here -->
+<div class="explore-section">
+    <a href="explore.html" class="explore-button">Explore</a>
 </div>
 
-<!-- 🔵 Stats -->
+<!-- 🔵 Help Buttons -->
+<div class="help-buttons">
+    <a href="NeedHelp.html" class="need-help-button">🚨 Need Help</a>
+    <a href="WanttoHelp.html" class="want-help-button">❤️ Want to Help</a>
+</div>
+
+<!-- 🔵 Stats Section -->
 <div class="stats-section">
     <div class="stat-box">
         <div class="stat-number">985+</div>
@@ -74,7 +70,7 @@ function openProfile() {
     </div>
 </div>
 
-<!-- 🔵 Reviews -->
+<!-- 🔵 Review Section -->
 <div class="review-section">
 
     <button class="nav prev">❮</button>
@@ -107,7 +103,7 @@ function openProfile() {
 
 </div>
 
-<!-- 🔵 Support -->
+<!-- 🔵 Support Section -->
 <div class="support-section">
     <h2>Together we can build stronger communities</h2>
     <p class="support-text">
@@ -124,7 +120,7 @@ function openProfile() {
     <a href="supportus.html" class="support-button">Support Us</a>
 </div>
 
-<!-- JS -->
+<!-- 🔵 JS for slider -->
 <script>
 let index = 0;
 const slider = document.getElementById("slider");
@@ -147,5 +143,6 @@ function updateSlider() {
     cards[index].classList.add("active");
 }
 </script>
+
 </body>
 </html>
