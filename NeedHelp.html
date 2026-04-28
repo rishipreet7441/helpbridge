@@ -178,33 +178,35 @@
 
   <!-- ✅ Backend connection -->
   <script>
-  document.getElementById("helpForm").addEventListener("submit", async function(e){
-    e.preventDefault();
+document.getElementById("helpForm").addEventListener("submit", async function(e){
+  e.preventDefault();
 
-    try {
-      const res = await fetch("http://127.0.0.1:8000/help-request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: document.getElementById("name").value,
-          phone: document.getElementById("phone").value,
-          location: document.getElementById("location").value,
-          help_type: document.getElementById("help_type").value,
-          description: document.getElementById("description").value
-        })
-      });
+  alert("Submitting request... Please wait ⏳");
 
-      const data = await res.json();
-      alert(data.message);
+  try {
+    const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/help-request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        location: document.getElementById("location").value,
+        help_type: document.getElementById("help_type").value,
+        description: document.getElementById("description").value
+      })
+    });
 
-    } catch(error){
-      alert("Error submitting request");
-      console.error(error);
-    }
-  });
-  </script>
+    const data = await res.json();
+    alert(data.message || "Request submitted successfully!");
+
+  } catch(error){
+    alert("Failed to submit. Please try again.");
+    console.error(error);
+  }
+});
+</script>
 
 </body>
 </html>
