@@ -22,7 +22,6 @@
     <div class="right">
         <h2>Application Form</h2>
 
-        <!-- ✅ Added form ID -->
         <form id="volunteerForm">
 
             <div>
@@ -116,33 +115,41 @@
 
 </div>
 
-<!-- ✅ JS CONNECTION -->
+<!-- ✅ FIXED BACKEND -->
 <script>
 document.getElementById("volunteerForm").addEventListener("submit", async function(e){
     e.preventDefault();
 
-    const res = await fetch("http://127.0.0.1:8000/add-volunteer", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: document.getElementById("name").value,
-            dob: document.getElementById("dob").value,
-            gender: document.getElementById("gender").value,
-            phone: document.getElementById("phone").value,
-            email: document.getElementById("email").value,
-            idType: document.getElementById("idType").value,
-            idNumber: document.getElementById("idNumber").value,
-            address: document.getElementById("address").value,
-            skills: document.getElementById("skills").value,
-            availability: document.getElementById("availability").value
-        })
-    });
+    alert("Submitting application... Please wait ⏳");
 
-    const data = await res.json();
+    try {
+        const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/add-volunteer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: document.getElementById("name").value,
+                dob: document.getElementById("dob").value,
+                gender: document.getElementById("gender").value,
+                phone: document.getElementById("phone").value,
+                email: document.getElementById("email").value,
+                idType: document.getElementById("idType").value,
+                idNumber: document.getElementById("idNumber").value,
+                address: document.getElementById("address").value,
+                skills: document.getElementById("skills").value,
+                availability: document.getElementById("availability").value
+            })
+        });
 
-    alert(data.message);
+        const data = await res.json();
+
+        alert(data.message || "Application submitted successfully!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Server is waking up. Please try again.");
+    }
 });
 </script>
 
