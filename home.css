@@ -1,3 +1,16 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+
+    background-image: url("si.jpeg"); /* 🔁 change to your image name */
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+
+    background-position: center top; /* 🔥 move background UP */
+    background-attachment: scroll;  
+    margin: 0;
+    padding: 0; 
+    min-height: 100vh;   /* 🔥 scrolls with page */
+}
 .social-icon {
     font-size: 22px;
     margin-left: 10px;
@@ -25,19 +38,21 @@
     background-color: #0b1f3a;
     color: white;
     padding: 10px;
+    margin:0;
 }
 
 .top-row a {
     color: white;
 }
 .logo-row {
-    margin-top: 15px;
+    margin-top: 0px;
 }
 
 .logo {
     width: 60px;
     height: 60px;
     border-radius: 50%;
+
 }
 
 .website-name {
@@ -86,36 +101,35 @@
 }
 .glass-box {
     width: 80%;
-    height: 320px;
+    height: 350px;
     margin: 30px auto;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    transition: 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 0px;
+    position: relative;
 }
 
 .glass-logo {
-    width: 180px;
-    height: 100px;
+    width: 300px;
+    height: auto;
     border-radius: 20px;
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    mix-blend-mode: multiply;
+    margin-bottom: 2px;
 }
 
 .glass-title {
-    font-size: 50px;
+    font-size: 80px;
+    font-weight: 800;
     margin: 0;
 }
 
 .glass-subtitle {
-    font-size: 22px;
-    margin-top: 10px;
+    font-size: 28px;
+    margin-top: 1px;
 }
 .help-buttons {
     text-align: center;
@@ -154,9 +168,10 @@
     color: white;
     text-align: center;
     padding: 50px 20px;
-    margin-top: 60px;
+    margin-top: 0px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
+    width: 100%;
 }
 
 .support-section h2 {
