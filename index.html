@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -26,7 +26,6 @@
         <input type="text" id="loginEmail" placeholder="Email" required>
         <input type="password" id="loginPassword" placeholder="Password" required>
 
-        <!-- CAPTCHA -->
         <div class="captcha-box">
           <span id="captchaText"></span>
           <button type="button" id="refreshCaptcha">↻</button>
@@ -79,6 +78,8 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
+  const BASE_URL = "https://helpbridge-backend-1-d3ui.onrender.com";
+
   const loginBtn = document.getElementById("loginBtn");
   const signupBtn = document.getElementById("signupBtn");
   const loginForm = document.getElementById("loginForm");
@@ -120,8 +121,10 @@ document.addEventListener("DOMContentLoaded", function(){
   signupForm.addEventListener("submit", async function(e){
     e.preventDefault();
 
+    alert("Please wait... Connecting to server ⏳");
+
     try {
-      const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/signup", {
+      const res = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -133,8 +136,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
       const data = await res.json();
       alert(data.message);
+
     } catch(err){
-      alert("Signup failed. Check backend.");
+      alert("Signup failed. Please try again after a few seconds.");
       console.error(err);
     }
   });
@@ -149,8 +153,10 @@ document.addEventListener("DOMContentLoaded", function(){
       return;
     }
 
+    alert("Logging in... Please wait ⏳");
+
     try {
-      const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/login", {
+      const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -164,10 +170,11 @@ document.addEventListener("DOMContentLoaded", function(){
       if(data.success){
         window.location.href = "home.html";
       } else {
-        alert(data.message);
+        alert(data.message || "Login failed");
       }
+
     } catch(err){
-      alert("Login failed. Check backend.");
+      alert("Login failed. Server may be waking up, try again.");
       console.error(err);
     }
   });
