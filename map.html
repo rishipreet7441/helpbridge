@@ -53,14 +53,22 @@ async function submitForm() {
     const type = document.getElementById("type").value;
     const details = document.getElementById("details").value;
 
-    const res = await fetch("http://127.0.0.1:8000/voice-help", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({name,mode,type,details})
-    });
+    alert("Submitting... Please wait ⏳");
 
-    const data = await res.json();
-    alert(data.message);
+    try {
+        const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/voice-help", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({name, mode, type, details})
+        });
+
+        const data = await res.json();
+        alert(data.message || "Request submitted successfully!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Server is waking up. Try again.");
+    }
 }
 
 </script>
