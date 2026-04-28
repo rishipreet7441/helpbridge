@@ -42,23 +42,32 @@
 
 <script>
 
+const BASE_URL = "https://helpbridge-backend-1-d3ui.onrender.com";
+
 // LOAD PROFILE
 async function loadProfile(){
-    const res = await fetch("http://127.0.0.1:8000/profile");
-    const data = await res.json();
+    try {
+        const res = await fetch(`${BASE_URL}/profile`);
+        const data = await res.json();
 
-    if(data){
-        document.getElementById("first_name").value = data.first_name || "";
-        document.getElementById("last_name").value = data.last_name || "";
-        document.getElementById("email").value = data.email || "";
-        document.getElementById("mobile").value = data.mobile || "";
-        document.getElementById("address").value = data.address || "";
+        if(data){
+            document.getElementById("first_name").value = data.first_name || "";
+            document.getElementById("last_name").value = data.last_name || "";
+            document.getElementById("email").value = data.email || "";
+            document.getElementById("mobile").value = data.mobile || "";
+            document.getElementById("address").value = data.address || "";
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Server is waking up. Please refresh.");
     }
 }
 
 // SAVE PROFILE
 document.getElementById("profileForm").addEventListener("submit", async function(e){
     e.preventDefault();
+
+    alert("Saving profile... Please wait ⏳");
 
     const body = {
         first_name: document.getElementById("first_name").value,
@@ -68,14 +77,20 @@ document.getElementById("profileForm").addEventListener("submit", async function
         address: document.getElementById("address").value
     };
 
-    const res = await fetch("http://127.0.0.1:8000/profile", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(body)
-    });
+    try {
+        const res = await fetch(`${BASE_URL}/profile`, {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(body)
+        });
 
-    const data = await res.json();
-    alert(data.message);
+        const data = await res.json();
+        alert(data.message || "Profile saved successfully!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Failed to save profile. Try again.");
+    }
 });
 
 loadProfile();
