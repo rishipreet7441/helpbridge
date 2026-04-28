@@ -176,7 +176,6 @@ textarea{
 
 </form>
 </div>
-
 <script>
 async function submitOffer() {
 
@@ -191,8 +190,10 @@ async function submitOffer() {
     return;
   }
 
+  alert("Submitting offer... Please wait ⏳");
+
   try {
-    const res = await fetch("http://127.0.0.1:8000/offer-help", {
+    const res = await fetch("https://helpbridge-backend-1-d3ui.onrender.com/offer-help", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -212,7 +213,7 @@ async function submitOffer() {
 
   } catch (err) {
     console.error(err);
-    alert("Server error");
+    alert("Server is waking up. Please try again.");
   }
 }
 </script>
